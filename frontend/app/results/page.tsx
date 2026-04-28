@@ -329,8 +329,9 @@ const ArchitecturalImage = ({
                
                if (errorCount === 2) {
                  setErrorCount(3);
-                 console.error("Critical Render Failure: Neural fallbacks exhausted. Switching to Master Portfolio Assets.");
-                 setImgSrc('/curated/eco_1.png'); 
+                 console.error(`Critical Render Failure: Neural fallbacks exhausted for ${type}. Switching to Master Asset.`);
+                 const idx = (type === 'draft' ? 1 : type === 'elevation' ? 2 : type === 'site' ? 3 : 4);
+                 setImgSrc(`/curated/eco_${idx}.png?v=6`); 
                  setLoaded(true);
                  return;
                }
