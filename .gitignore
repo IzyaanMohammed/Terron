@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Next.js build output
+.next/
+*/.next/
+out/
+
+# Environment Variables (IMPORTANT: Never commit these)
+.env
+.env.local
+.env.*.local
+*/.env*
+
+# IDEs and OS
+.vscode/
+.idea/
+.DS_Store
+*.log
+dist/
+build/
+
+# Terron Master Assets (Optional: Keep if you want them in the repo)
+# frontend/public/curated/*.png
