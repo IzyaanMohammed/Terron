@@ -2,6 +2,14 @@
   "name": "terron-monorepo",
   "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "dependencies": {
+    "next": "16.2.0",
+    "react": "^19",
+    "react-dom": "^19"
+  },
   "scripts": {
     "build": "cd frontend && npm run build",
     "start": "cd frontend && npm run start",
