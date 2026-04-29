@@ -408,117 +408,106 @@ export default function ResultsPage() {
       <Navigation />
       
       <div className="max-w-7xl mx-auto px-10 py-24 pt-40 space-y-40">
-        {/* Hero Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative min-h-[50vh] flex flex-col justify-center"
-        >
-          <div className="absolute -left-20 top-0 opacity-10 pointer-events-none">
-            <Activity className="w-[40rem] h-[40rem] text-emerald-400" />
-          </div>
-
-          <div className="relative z-10 space-y-16">
+        {/* Dashboard Header */}
+        <header className="space-y-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
             <div className="space-y-6">
               <motion.span 
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 className="inline-block px-6 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-[0.5em] border border-emerald-500/20"
               >
-                Project Synthesis Report
+                Intelligent Design Dossier
               </motion.span>
-              <h1 className="font-serif text-8xl md:text-9xl font-bold text-white tracking-tight leading-[0.85]">
+              <h1 className="font-serif text-8xl font-bold text-white tracking-tight">
                 {projectData.name}
               </h1>
             </div>
-
-            <p className="text-3xl md:text-4xl text-emerald-100/60 font-light max-w-5xl leading-relaxed">
-              {projectData.description || "A next-generation architectural intervention blending high-tech performance with biological harmony."}
-            </p>
-
-            <div className="flex flex-wrap gap-10 pt-10">
-               {[
-                 { label: 'Thermal Peak', value: `${weather.temperature_max}°C`, icon: Thermometer, color: 'text-rose-400' },
-                 { label: 'Hydrology', value: `${weather.precipitation_sum}mm`, icon: Droplets, color: 'text-sky-400' },
-                 { label: 'Eco-Stability', value: 'Alpha-7', icon: Sparkles, color: 'text-emerald-400' }
-               ].map((stat, i) => (
-                 <div key={i} className="flex items-center gap-6 px-10 py-7 rounded-[2rem] bg-white/[0.02] border border-white/5 hover:border-emerald-500/20 transition-all group">
-                   <stat.icon className={`w-10 h-10 ${stat.color} group-hover:scale-110 transition-transform`} />
-                   <div>
-                     <p className="text-[10px] text-white/30 uppercase tracking-[0.3em] mb-1">{stat.label}</p>
-                     <p className="text-3xl font-mono font-bold text-white tracking-tighter">{stat.value}</p>
-                   </div>
-                 </div>
-               ))}
+            <div className="flex items-center gap-6 px-8 py-5 rounded-3xl bg-white/[0.02] border border-white/5">
+               <div className="text-right">
+                  <p className="text-[10px] text-white/30 uppercase tracking-widest mb-1">Location Coordinates</p>
+                  <p className="text-sm font-mono text-emerald-400">{projectData.lat.toFixed(4)}°N, {projectData.lng.toFixed(4)}°E</p>
+               </div>
+               <div className="w-px h-10 bg-white/10" />
+               <div className="text-right">
+                  <p className="text-[10px] text-white/30 uppercase tracking-widest mb-1">Building Profile</p>
+                  <p className="text-sm font-mono text-white">{projectData.buildingType || 'Residential'}</p>
+               </div>
             </div>
           </div>
-        </motion.section>
+          
+          <div className="grid lg:grid-cols-4 gap-10">
+             {[
+               { label: 'Ambient Peak', value: `${weather.temperature_max}°C`, sub: `Low: ${weather.temperature_min}°C`, icon: Thermometer, color: 'text-rose-400' },
+               { label: 'Saturation', value: `${weather.humidity}%`, sub: 'Atmospheric Moisture', icon: Droplets, color: 'text-sky-400' },
+               { label: 'UV Index', value: weather.uv_index, sub: weather.uv_index > 7 ? 'Extreme Level' : 'Moderate', icon: Sun, color: 'text-amber-400' },
+               { label: 'Structural Area', value: `${projectData.area}m²`, sub: 'Footprint Analysis', icon: Ruler, color: 'text-emerald-400' }
+             ].map((stat, i) => (
+               <div key={i} className="glass-card p-10 rounded-[2.5rem] border-white/5 space-y-6 hover:bg-white/[0.03] transition-all group">
+                 <div className={`p-4 rounded-2xl bg-white/5 w-fit ${stat.color} group-hover:scale-110 transition-transform`}>
+                   <stat.icon className="w-8 h-8" />
+                 </div>
+                 <div>
+                   <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em] mb-2">{stat.label}</p>
+                   <p className="text-4xl font-mono font-bold text-white tracking-tighter">{stat.value}</p>
+                   <p className="text-[10px] text-white/10 mt-3 font-medium uppercase tracking-widest">{stat.sub}</p>
+                 </div>
+               </div>
+             ))}
+          </div>
+        </header>
 
-        {/* Neural Analysis Section */}
-        <section className="grid lg:grid-cols-2 gap-32 items-center">
-           <div className="space-y-12">
-              <div className="flex items-center gap-6">
-                <div className="w-20 h-20 rounded-[2rem] bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 shadow-2xl">
-                  <Brain className="w-10 h-10 text-emerald-400" />
+        {/* Neural Analysis Section - Large Callout */}
+        <section className="relative">
+           <div className="absolute -inset-10 bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+           <div className="relative glass-card p-20 rounded-[4rem] border-emerald-500/20 border bg-emerald-950/20 shadow-2xl flex flex-col md:flex-row gap-16 items-center">
+              <div className="shrink-0">
+                <div className="w-32 h-32 rounded-[3rem] bg-emerald-500/10 flex items-center justify-center border-2 border-emerald-500/20 shadow-[0_0_50px_rgba(16,185,129,0.2)]">
+                  <Brain className="w-16 h-16 text-emerald-400" />
                 </div>
-                <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.5em]">Neural Core Synthesis</h2>
               </div>
-              <h3 className="text-5xl md:text-6xl font-serif text-white leading-tight">
-                Synthesizing multi-modal environmental data.
-              </h3>
-              <div className="flex items-center gap-4">
-                <span className="px-5 py-2 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-[0.2em] border border-emerald-500/20">
-                  Resilience Optimized
-                </span>
-                <span className="text-white/30 text-[10px] font-mono uppercase tracking-[0.2em]">
-                  Lat: {projectData.lat.toFixed(4)}° / Lng: {projectData.lng.toFixed(4)}°
-                </span>
+              <div className="space-y-6">
+                <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.6em]">Neural Engine Synthesis</h2>
+                <p className="text-3xl md:text-4xl text-emerald-50/90 leading-tight font-light italic">
+                  "{critiqueText}"
+                </p>
               </div>
-           </div>
-
-           <div className="relative group">
-             <div className="absolute -inset-10 bg-emerald-500/5 blur-[100px] group-hover:bg-emerald-500/10 transition-all rounded-full" />
-             <div className="relative glass-card p-16 rounded-[3rem] border-emerald-500/20 border bg-emerald-950/30 min-h-[400px] flex items-center shadow-2xl">
-               <p className="text-2xl md:text-3xl text-emerald-50/90 leading-relaxed font-light italic">
-                 "{critiqueText}"
-               </p>
-             </div>
            </div>
         </section>
 
-        {/* Visualization Grid */}
+        {/* Visualization Hub */}
         <section className="space-y-24">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
             <div className="space-y-6">
-              <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.5em]">Architectural Evolution</h2>
-              <h3 className="text-6xl font-serif text-white">Visual Synthesis Phases</h3>
+              <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.5em]">Phase Visualization Matrix</h2>
+              <h3 className="text-6xl font-serif text-white">Architectural Evolution</h3>
             </div>
             <div className="flex items-center gap-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white/40 text-[10px] font-mono uppercase tracking-[0.3em]">
               <ImageIcon className="w-4 h-4" />
-              {imageModelSource}
+              Rendering Core: {imageModelSource}
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-16">
             {[
-              { type: 'draft', title: 'Phase 1: Technical Draft', span: 'col-span-1' },
-              { type: 'elevation', title: 'Phase 2: Facade Elevation', span: 'col-span-1' },
-              { type: 'site', title: 'Phase 3: Environmental Plot', span: 'col-span-1' },
-              { type: 'realistic', title: 'Phase 4: Final Vision', span: 'col-span-1' }
+              { type: 'draft', title: 'Phase 1: Technical Draft', code: 'SD-01' },
+              { type: 'elevation', title: 'Phase 2: Elevation Synthesis', code: 'SD-02' },
+              { type: 'site', title: 'Phase 3: Environmental Plot', code: 'SD-03' },
+              { type: 'realistic', title: 'Phase 4: Synthesis Vision', code: 'SD-04' }
             ].map((phase, i) => (
               <motion.div 
                 key={phase.type}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.15 }}
                 viewport={{ once: true }}
-                className={`${phase.span} group`}
+                transition={{ delay: i * 0.1 }}
+                className="group"
               >
                 <div className="mb-8 flex justify-between items-center px-4">
-                   <h4 className="text-xs font-bold text-white/40 uppercase tracking-[0.3em]">{phase.title}</h4>
-                   <span className="text-[10px] text-white/20 font-mono tracking-widest">SEQ.0{i+1}</span>
+                   <h4 className="text-xs font-bold text-white/40 uppercase tracking-[0.4em]">{phase.title}</h4>
+                   <span className="text-[10px] text-white/20 font-mono tracking-[0.3em]">{phase.code}</span>
                 </div>
-                <div className="aspect-[16/10] rounded-[2.5rem] overflow-hidden border border-white/5 group-hover:border-emerald-500/40 transition-all duration-700 shadow-[0_0_50px_rgba(0,0,0,0.5)] bg-black/40 group-hover:shadow-[0_0_80px_rgba(16,185,129,0.1)]">
+                <div className="aspect-[16/10] rounded-[3rem] overflow-hidden border border-white/5 group-hover:border-emerald-500/40 transition-all duration-700 shadow-2xl bg-black/40">
                   <ArchitecturalImage
                     prompt={getPrompt(phase.type as any)}
                     seed={seedBase + i * 10}
@@ -534,104 +523,97 @@ export default function ResultsPage() {
           </div>
         </section>
 
-        {/* Intelligence Dashboard */}
+        {/* Intelligence Dossier - The Main Highlight */}
+        <section className="space-y-24 pt-10">
+           <div className="text-center space-y-6">
+              <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.6em]">Deep Environmental Analysis</h2>
+              <h3 className="text-6xl font-serif text-white">Sustainability Dossier</h3>
+           </div>
+           
+           <div className="glass-card p-16 rounded-[4rem] border-emerald-500/10 bg-emerald-950/10 shadow-2xl">
+             <SustainabilityDossier
+               dossier={ecoDossier}
+               designProblems={projectData.aiAnalysis?.designProblems || []}
+               thermalRisk={projectData.aiAnalysis?.thermalRisk}
+               temp={weather.temperature_max}
+               calculatedMetrics={projectData.aiAnalysis?.calculatedMetrics}
+             />
+           </div>
+        </section>
+
+        {/* Analytics & Measurements Grid */}
+        <section className="grid lg:grid-cols-2 gap-20">
+           <div className="space-y-12">
+              <div className="space-y-6">
+                 <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.5em]">Volumetric Specifications</h2>
+                 <h3 className="text-5xl font-serif text-white">Technical Measurements</h3>
+              </div>
+              <TechnicalMeasurements
+                totalArea={projectData.area}
+                buildingType={projectData.buildingType}
+                syntheticLayout={projectData.aiAnalysis?.syntheticLayout}
+              />
+           </div>
+
+           <div className="space-y-12">
+              <div className="space-y-6">
+                 <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.5em]">Performance Analytics</h2>
+                 <h3 className="text-5xl font-serif text-white">Design Metrics</h3>
+              </div>
+              <div className="glass-card p-12 rounded-[3rem] border-white/5 bg-white/[0.01] h-full">
+                <DesignMetrics 
+                  metrics={designOptions[selectedDesign === 'nature-first' ? 2 : selectedDesign === 'improved' ? 1 : 0].metrics} 
+                  showDetails 
+                />
+              </div>
+           </div>
+        </section>
+
+        {/* Strategy Selection */}
         <section className="space-y-24">
           <div className="text-center space-y-6">
-             <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.5em]">Live Environmental Data</h2>
-             <h3 className="text-6xl font-serif text-white">Intelligence Dashboard</h3>
+             <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.6em]">Optimization Selection</h2>
+             <h3 className="text-6xl font-serif text-white">Strategy Activation</h3>
           </div>
 
-          <div className="grid lg:grid-cols-4 gap-10">
-             {[
-               { label: 'Thermal Peak', value: `${weather.temperature_max}°C`, sub: `Daily Low: ${weather.temperature_min}°C`, icon: Thermometer, color: 'text-rose-400' },
-               { label: 'Saturation', value: `${weather.humidity}%`, sub: 'Atmospheric Moisture', icon: Droplets, color: 'text-sky-400' },
-               { label: 'UV Intensity', value: weather.uv_index, sub: weather.uv_index > 7 ? 'Extreme Level' : 'Moderate Level', icon: Sun, color: 'text-amber-400' },
-               { label: 'Wind Velocity', value: `${weather.wind_speed} km/h`, sub: `Orientation: ${weather.wind_direction}°`, icon: Wind, color: 'text-indigo-400' }
-             ].map((stat, i) => (
-               <div key={i} className="glass-card p-12 rounded-[3rem] border-white/5 space-y-10 hover:bg-white/[0.03] transition-all duration-500 group">
-                 <div className={`p-6 rounded-3xl bg-white/5 w-fit ${stat.color} group-hover:scale-110 transition-transform`}>
-                   <stat.icon className="w-10 h-10" />
-                 </div>
-                 <div className="space-y-2">
-                   <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">{stat.label}</p>
-                   <p className="text-5xl font-mono font-bold text-white tracking-tighter">{stat.value}</p>
-                   <p className="text-xs text-white/10 mt-4 font-medium tracking-wide">{stat.sub}</p>
-                 </div>
-               </div>
-             ))}
-          </div>
-        </section>
-
-        {/* Dossier & Selection Section */}
-        <section className="space-y-32">
-          <div className="grid lg:grid-cols-2 gap-16">
-             <div className="space-y-12">
-               <div className="space-y-6">
-                 <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.5em]">Optimization Strategy</h2>
-                 <h3 className="text-5xl font-serif text-white">Final Configuration</h3>
-               </div>
-               <div className="grid gap-6">
-                 {enhancedDesigns.map((design, index) => (
-                   <DesignCard
-                     key={design.id}
-                     design={design}
-                     isSelected={selectedDesign === design.id}
-                     onSelect={() => handleSelectDesign(design.id)}
-                     delay={0.1 * index}
-                   />
-                 ))}
-               </div>
-             </div>
-
-             <div className="space-y-12">
-               <div className="space-y-6">
-                 <h2 className="text-xs font-bold text-emerald-400 uppercase tracking-[0.5em]">Sustainability Logic</h2>
-                 <h3 className="text-5xl font-serif text-white">System Dossier</h3>
-               </div>
-               <div className="glass-card p-10 rounded-[3rem] border-emerald-500/10 bg-emerald-950/10">
-                 <SustainabilityDossier
-                   dossier={ecoDossier}
-                   designProblems={projectData.aiAnalysis?.designProblems || []}
-                   thermalRisk={projectData.aiAnalysis?.thermalRisk}
-                   temp={weather.temperature_max}
-                   calculatedMetrics={projectData.aiAnalysis?.calculatedMetrics}
-                 />
-               </div>
-             </div>
+          <div className="grid md:grid-cols-3 gap-12">
+            {enhancedDesigns.map((design, index) => (
+              <DesignCard
+                key={design.id}
+                design={design}
+                isSelected={selectedDesign === design.id}
+                onSelect={() => handleSelectDesign(design.id)}
+                delay={0.1 * index}
+              />
+            ))}
           </div>
 
-          <TechnicalMeasurements
-            totalArea={projectData.area}
-            buildingType={projectData.buildingType}
-            syntheticLayout={projectData.aiAnalysis?.syntheticLayout}
-          />
-        </section>
-
-        {/* Final CTA */}
-        <section className="py-40 text-center border-t border-white/5 space-y-16">
-           <div className="max-w-4xl mx-auto space-y-12">
-             <h2 className="text-6xl font-serif text-white leading-tight">Ready to generate the architectural dossier?</h2>
-             <p className="text-2xl text-white/40 font-light max-w-2xl mx-auto">
-               Finalize your selection to initiate the high-fidelity render pipeline and environmental certification.
-             </p>
-             <div className="flex flex-col sm:flex-row justify-center gap-10 pt-10">
-                <button 
-                  onClick={handleProceed}
-                  disabled={!selectedDesign}
-                  className={`
-                    px-16 py-8 rounded-full font-bold text-xl uppercase tracking-[0.2em] transition-all shadow-2xl
-                    ${selectedDesign 
-                      ? "bg-emerald-500 text-black hover:scale-105 shadow-[0_0_60px_rgba(52,211,153,0.3)] active:scale-95" 
-                      : "bg-white/5 text-white/20 cursor-not-allowed"}
-                  `}
-                >
-                  Launch Build Phase
-                </button>
+          {selectedDesign && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-20 p-16 rounded-[3rem] border border-emerald-500/20 bg-emerald-500/5 shadow-2xl text-center space-y-10"
+            >
+              <div className="space-y-4">
+                <h4 className="text-5xl font-serif font-bold text-white">{designOptions.find(d => d.id === selectedDesign)?.title} Strategy Confirmed</h4>
+                <p className="text-xl text-emerald-100/60 max-w-2xl mx-auto leading-relaxed">
+                  The structural and environmental parameters have been synchronized for {selectedDesign} optimization. Ready to finalize the architectural blueprint.
+                </p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row justify-center gap-10">
                 <div className="scale-125 origin-center">
                   <DownloadReportButton projectData={projectData} />
                 </div>
-             </div>
-           </div>
+                <button
+                  onClick={handleProceed}
+                  className="px-16 py-8 rounded-full bg-emerald-500 text-black font-bold text-xl uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_60px_rgba(52,211,153,0.3)] active:scale-95"
+                >
+                  Generate Blueprint
+                </button>
+              </div>
+            </motion.div>
+          )}
         </section>
       </div>
 

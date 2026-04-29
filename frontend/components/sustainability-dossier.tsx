@@ -139,54 +139,58 @@ export function SustainabilityDossier({ dossier, designProblems = [], temp = 32,
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.07 }}
-                className={`rounded-2xl border ${uc.border} ${uc.bg} p-6 relative overflow-hidden group hover:scale-[1.01] transition-transform`}
+                className={`rounded-3xl border ${uc.border} ${uc.bg} p-10 relative overflow-hidden group hover:bg-white/[0.04] transition-all shadow-xl`}
               >
                 {/* Urgency Tag */}
-                <div className={`absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${uc.border} text-[9px] font-bold uppercase tracking-wider ${uc.color}`}>
-                  <div className={`w-1.5 h-1.5 rounded-full ${uc.dot} animate-pulse`} />
+                <div className={`absolute top-6 right-6 flex items-center gap-2 px-4 py-1.5 rounded-full border ${uc.border} text-xs font-bold uppercase tracking-widest ${uc.color}`}>
+                  <div className={`w-2 h-2 rounded-full ${uc.dot} animate-pulse`} />
                   {urgency}
                 </div>
 
                 {/* Header */}
-                <div className="flex items-start gap-3 mb-4 pr-20">
-                  <div className={`w-9 h-9 rounded-xl ${uc.bg} border ${uc.border} flex items-center justify-center shrink-0`}>
-                    <Icon className={`w-4 h-4 ${uc.color}`} />
+                <div className="flex items-start gap-6 mb-10 pr-24">
+                  <div className={`w-14 h-14 rounded-2xl ${uc.bg} border ${uc.border} flex items-center justify-center shrink-0 shadow-glow`}>
+                    <Icon className={`w-7 h-7 ${uc.color}`} />
                   </div>
                   <div>
-                    <h5 className="font-serif text-base font-bold text-white leading-tight">{item.trick}</h5>
-                    <div className="flex items-center gap-1 mt-1">
-                      <MapPin className="w-3 h-3 text-muted-foreground" />
-                      <span className="text-[10px] text-muted-foreground font-mono">{item.location}</span>
+                    <h5 className="font-serif text-2xl font-bold text-white leading-tight">{item.trick}</h5>
+                    <div className="flex items-center gap-2 mt-2">
+                      <MapPin className="w-4 h-4 text-white/40" />
+                      <span className="text-xs text-white/40 font-mono tracking-widest uppercase">{item.location}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Why (data-based) */}
-                {(item.why || item.method) && (
-                  <div className="mb-3">
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1">Why This Matters</p>
-                    <p className="text-xs text-white/70 leading-relaxed">{item.why || item.method}</p>
-                  </div>
-                )}
-
-                {/* How */}
-                {item.how && (
-                  <div className="mb-3">
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1">How To Implement</p>
-                    <p className="text-xs text-white/70 leading-relaxed">{item.how}</p>
-                  </div>
-                )}
-
-                {/* Benefit */}
-                {item.benefit && (
-                  <div className={`mt-4 p-3 rounded-xl ${uc.bg} border ${uc.border}`}>
-                    <div className="flex items-center gap-1.5">
-                      <TrendingUp className={`w-3.5 h-3.5 ${uc.color}`} />
-                      <p className={`text-xs font-bold ${uc.color}`}>{item.benefit}</p>
+                {/* Content Sections - More Spaced Out */}
+                <div className="space-y-8">
+                  {/* Why (data-based) */}
+                  {(item.why || item.method) && (
+                    <div className="space-y-2">
+                      <p className="text-xs font-bold text-emerald-400/60 uppercase tracking-[0.3em]">Rationale & Impact</p>
+                      <p className="text-lg text-white/80 leading-relaxed font-light">{item.why || item.method}</p>
                     </div>
-                  </div>
-                )}
+                  )}
+
+                  {/* How */}
+                  {item.how && (
+                    <div className="space-y-2">
+                      <p className="text-xs font-bold text-sky-400/60 uppercase tracking-[0.3em]">Implementation Strategy</p>
+                      <p className="text-lg text-white/80 leading-relaxed font-light">{item.how}</p>
+                    </div>
+                  )}
+
+                  {/* Benefit */}
+                  {item.benefit && (
+                    <div className={`mt-8 p-6 rounded-2xl ${uc.bg} border ${uc.border} flex items-center gap-4`}>
+                      <div className={`p-2 rounded-lg ${uc.bg}`}>
+                        <TrendingUp className={`w-6 h-6 ${uc.color}`} />
+                      </div>
+                      <p className={`text-lg font-bold ${uc.color}`}>{item.benefit}</p>
+                    </div>
+                  )}
+                </div>
               </motion.div>
+            )
             )
           })}
         </div>
