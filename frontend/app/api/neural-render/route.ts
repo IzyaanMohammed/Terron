@@ -36,9 +36,9 @@ export async function POST(req: Request) {
         else if (type === 'site') idx = 3;
         
         let foundPath = null;
-        const publicDir = path.join(process.cwd(), 'public');
+        const publicDir = path.join(/* turbopackIgnore: true */ process.cwd(), 'public');
         const possiblePaths = [
-          path.join(publicDir, folder, `${prefix}${idx}.png`)
+          path.join(/* turbopackIgnore: true */ publicDir, folder, `${prefix}${idx}.png`)
         ];
         
         for (const p of possiblePaths) {
