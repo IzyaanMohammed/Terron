@@ -40,24 +40,27 @@ export function TechnicalMeasurements({ totalArea, buildingType, syntheticLayout
   const breakdown = getRoomBreakdown()
 
   return (
-    <div className="mt-8">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
-          <TableIcon className="w-4 h-4 text-accent" />
+    <div className="mt-20 space-y-12">
+      <div className="flex items-center gap-6">
+        <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 shadow-2xl">
+          <TableIcon className="w-8 h-8 text-emerald-400" />
         </div>
-        <h3 className="font-serif text-xl font-bold text-white uppercase tracking-wider">
-          Synthetic Layout Specifications
-        </h3>
+        <div>
+          <h3 className="font-serif text-4xl font-bold text-white tracking-tight">
+            Synthetic Layout Specifications
+          </h3>
+          <p className="text-[10px] text-white/30 uppercase tracking-[0.4em] mt-1">Volumetric Spatial Distribution Analysis</p>
+        </div>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-border/50 bg-secondary/20 backdrop-blur-md">
+      <div className="overflow-x-auto rounded-[2.5rem] border border-white/5 bg-emerald-950/20 backdrop-blur-xl shadow-2xl">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-border/50 bg-secondary/40">
-              <th className="px-6 py-4 text-xs font-bold text-muted-foreground uppercase tracking-widest">Zone / Sector</th>
-              <th className="px-6 py-4 text-xs font-bold text-muted-foreground uppercase tracking-widest">Net Area (m²)</th>
-              <th className="px-6 py-4 text-xs font-bold text-muted-foreground uppercase tracking-widest">Est. Dimensions</th>
-              <th className="px-6 py-4 text-xs font-bold text-muted-foreground uppercase tracking-widest">Fidelity Status</th>
+            <tr className="border-b border-white/10 bg-white/[0.03]">
+              <th className="px-12 py-10 text-xs font-bold text-white/50 uppercase tracking-[0.3em]">Zone / Sector</th>
+              <th className="px-12 py-10 text-xs font-bold text-white/50 uppercase tracking-[0.3em]">Net Area</th>
+              <th className="px-12 py-10 text-xs font-bold text-white/50 uppercase tracking-[0.3em]">Est. Dimensions</th>
+              <th className="px-12 py-10 text-xs font-bold text-white/50 uppercase tracking-[0.3em]">Fidelity Status</th>
             </tr>
           </thead>
           <tbody>
@@ -67,19 +70,19 @@ export function TechnicalMeasurements({ totalArea, buildingType, syntheticLayout
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
-                className="border-b border-border/10 hover:bg-primary/5 transition-colors group"
+                className="border-b border-white/5 hover:bg-white/[0.04] transition-colors group"
               >
-                <td className="px-6 py-4 text-sm font-medium text-white group-hover:text-primary transition-colors italic">
+                <td className="px-12 py-10 text-2xl font-light text-emerald-50 group-hover:text-emerald-300 transition-colors">
                   {item.room}
                 </td>
-                <td className="px-6 py-4 text-sm font-mono text-accent">
+                <td className="px-12 py-10 text-3xl font-mono font-bold text-emerald-400">
                   {item.size}m²
                 </td>
-                <td className="px-6 py-4 text-sm text-muted-foreground font-mono">
+                <td className="px-12 py-10 text-lg text-white/40 font-mono">
                   {item.dimensions}
                 </td>
-                <td className="px-6 py-4">
-                  <span className="px-2 py-1 rounded-md bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-tighter shimmer-border">
+                <td className="px-12 py-10">
+                  <span className="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[9px] font-bold uppercase tracking-widest border border-emerald-500/20">
                     {item.efficiency}
                   </span>
                 </td>
@@ -87,10 +90,10 @@ export function TechnicalMeasurements({ totalArea, buildingType, syntheticLayout
             ))}
           </tbody>
           <tfoot>
-            <tr className="bg-primary/10">
-              <td className="px-6 py-4 text-sm font-bold text-white uppercase">Total Calculated</td>
-              <td className="px-6 py-4 text-sm font-bold font-mono text-primary">{totalArea}m²</td>
-              <td colSpan={2} className="px-6 py-4 text-[10px] text-muted-foreground italic tracking-tight">
+            <tr className="bg-emerald-500/5">
+              <td className="px-10 py-10 text-lg font-serif font-bold text-white uppercase tracking-widest">Total Calculated</td>
+              <td className="px-10 py-10 text-3xl font-bold font-mono text-emerald-400">{totalArea}m²</td>
+              <td colSpan={2} className="px-10 py-10 text-xs text-white/20 italic font-light">
                 *Measurements generated based on volumetric analysis of provided Vision and Building Type.
               </td>
             </tr>

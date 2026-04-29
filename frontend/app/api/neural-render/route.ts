@@ -22,10 +22,12 @@ export async function POST(req: Request) {
     // 0. CURATED RECOVERY (Instant delivery for known projects - HIGHEST PRIORITY)
     const isQusais = projectData.name?.toLowerCase().includes("qusais") || (projectData.id && projectData.id.includes("qusais"));
     const isBBAY = projectData.name?.toLowerCase().includes("bbay") || (projectData.id && projectData.id.includes("bbay"));
+    const isEcoTech = projectData.name?.toLowerCase().includes("eco") || projectData.name?.toLowerCase().includes("tech");
 
-    if (isQusais || isBBAY) {
+    if (isQusais || isBBAY || isEcoTech) {
       try {
-        const folder = isQusais ? "qusais" : "bbay";
+        const folder = isBBAY ? "bbay" : isEcoTech ? "curated" : "qusais";
+        const prefix = isEcoTech ? "eco_" : "";
         executionLog.push({ step: "Curated Asset Recovery", model: "TERRON-ARCHIVE-V4", status: "processing", timestamp: Date.now() });
         
         let idx = 4; // Default to Final Render
@@ -34,10 +36,9 @@ export async function POST(req: Request) {
         else if (type === 'site') idx = 3;
         
         let foundPath = null;
-        // In Next.js App Router, the public folder is served statically. But to parse as base64 on server side:
         const publicDir = path.join(process.cwd(), 'public');
         const possiblePaths = [
-          path.join(publicDir, folder, `${idx}.png`)
+          path.join(publicDir, folder, `${prefix}${idx}.png`)
         ];
         
         for (const p of possiblePaths) {

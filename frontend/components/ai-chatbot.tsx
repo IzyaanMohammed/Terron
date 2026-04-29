@@ -96,20 +96,20 @@ export function AIChatbot({ project }: { project: any }) {
             </div>
 
             {/* Input */}
-            <div className="p-6 bg-secondary/30 border-t border-primary/10">
+            <div className="p-8 bg-black/40 border-t border-white/10 backdrop-blur-3xl">
               <div className="relative">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Ask about sustainability..."
-                  className="w-full pl-4 pr-12 py-3 bg-input border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  placeholder="Inquire about eco-optimizations..."
+                  className="w-full pl-6 pr-16 py-4 bg-white/[0.03] border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all text-white placeholder:text-white/20 text-sm"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isLoading}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-primary hover:text-primary/80 disabled:opacity-50 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-3 text-emerald-400 hover:text-emerald-300 disabled:opacity-20 transition-all active:scale-90"
                 >
                   <Send className="w-5 h-5" />
                 </button>
