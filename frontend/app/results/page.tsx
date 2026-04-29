@@ -106,48 +106,73 @@ const ArchitecturalImage = ({
     isFetchingRef.current = true
     
     try {
-      // 1. Curated Fallback Logic
+      // 1. Curated Fallback Logic (Strategy Pattern)
       const projName = projectData.name.toLowerCase()
-      const isCurated = projName.includes('eco') || projName.includes('qusais') || projName.includes('suburb')
+      const isDubai = projName.includes("qusais") || projName.includes("twar")
+      const isBBAY = projName.includes("bbay")
+      const isEcoTech = projName.includes("eco") || projName.includes("tech") || projName.includes("suburb")
       
-      if (isCurated) {
-        const curatedMap: Record<string, string> = {
-          'draft': '/eco_1.png',
-          'elevation': '/eco_2.png',
-          'site': '/eco_3.png',
-          'realistic': '/eco_4.png'
-        }
-        const curatedUrl = curatedMap[type]
-        if (curatedUrl) {
-          setImgSrc(curatedUrl)
-          setLoaded(true)
-          onSourceUpdate?.('Terron Curated Master')
-          isFetchingRef.current = false
-          return
-        }
+      if (isDubai || isBBAY || isEcoTech) {
+        const folder = isBBAY ? "bbay" : isEcoTech ? "curated" : "qusais"
+        const prefix = isEcoTech ? "eco_" : ""
+        const idx = (type === 'draft' ? 1 : type === 'elevation' ? 2 : type === 'site' ? 3 : 4)
+        const curatedUrl = `/${folder}/${prefix}${idx}.png`
+        
+        setImgSrc(curatedUrl)
+        setLoaded(true)
+        onSourceUpdate?.('Terron Curated Master')
+        isFetchingRef.current = false
+        return
       }
 
       // 2. Neural Stream logic
       onSourceUpdate?.('Terron Neural Core')
-      const finalPrompt = `${prompt} Architectural masterpiece. 8k, cinematic.`
-      const url = await generateImage(finalPrompt)
+      const apiSeed = seed + retryNum * 7
+      const result = await generateImage(
+        prompt, 
+        apiSeed, 
+        type, 
+        [], 
+        projectData.visualSpecs || "", 
+        `var-${apiSeed}`, 
+        projectData
+      )
       
-      if (url) {
+      if (result && result.url) {
         if (currentPlan === 'a') {
-          setImgSrcB(url)
+          setImgSrcB(result.url)
           setCurrentPlan('b')
         } else {
-          setImgSrc(url)
+          setImgSrc(result.url)
+          setCurrentPlan('a')
+        }
+        setLoaded(true)
+      } else if (result && (result.url === null || result.source === 'Backend Error')) {
+        // Fallback to pollinations if backend fails or returns null
+        const cleanPrompt = prompt.replace(/[^a-zA-Z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+        const shortPrompt = cleanPrompt.length > 200 ? cleanPrompt.slice(0, 200) : cleanPrompt;
+        const fallbackUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(shortPrompt)}?width=1280&height=720&nologo=true&enhance=false&seed=${apiSeed}`;
+        if (currentPlan === 'a') {
+          setImgSrcB(fallbackUrl)
+          setCurrentPlan('b')
+        } else {
+          setImgSrc(fallbackUrl)
           setCurrentPlan('a')
         }
         setLoaded(true)
       }
     } catch (err) {
       console.error('Neural render error:', err)
+      // Final fallback on catastrophic error
+      const apiSeed = seed + retryNum * 7
+      const cleanPrompt = prompt.replace(/[^a-zA-Z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+      const shortPrompt = cleanPrompt.length > 200 ? cleanPrompt.slice(0, 200) : cleanPrompt;
+      setImgSrc(`https://image.pollinations.ai/prompt/${encodeURIComponent(shortPrompt)}?width=1280&height=720&nologo=true&enhance=false&seed=${apiSeed}`);
+      setLoaded(true)
     } finally {
       isFetchingRef.current = false
     }
-  }, [prompt, seed, type, projectData.name, onSourceUpdate, currentPlan])
+  }, [prompt, seed, type, projectData, onSourceUpdate, currentPlan])
 
   useEffect(() => {
     fetchImage(0)
