@@ -37,7 +37,7 @@ import {
   TrendingUp
 } from 'lucide-react'
 import { AIChatbot } from '@/components/ai-chatbot'
-import { DesignMetrics } from '@/components/design-card'
+import { DesignMetricsChart } from '@/components/design-card'
 import { SustainabilityDossier } from '@/components/sustainability-dossier'
 import { TechnicalMeasurements } from '@/components/technical-measurements'
 import {
@@ -561,7 +561,7 @@ export default function ResultsPage() {
                  <h3 className="text-5xl font-serif text-white">Design Metrics</h3>
               </div>
               <div className="glass-card p-12 rounded-[3rem] border-white/5 bg-white/[0.01] h-full">
-                <DesignMetrics 
+                <DesignMetricsChart 
                   metrics={designOptions[selectedDesign === 'nature-first' ? 2 : selectedDesign === 'improved' ? 1 : 0].metrics} 
                   showDetails 
                 />

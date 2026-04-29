@@ -191,7 +191,6 @@ export function SustainabilityDossier({ dossier, designProblems = [], temp = 32,
                 </div>
               </motion.div>
             )
-            )
           })}
         </div>
       </div>

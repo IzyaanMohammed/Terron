@@ -155,3 +155,31 @@ export function DesignCard({ design, isSelected, onSelect, delay = 0 }: DesignCa
     </motion.div>
   )
 }
+export function DesignMetricsChart({ metrics, showDetails = false }: { metrics: DesignMetrics, showDetails?: boolean }) {
+  const chartData = [
+    { subject: 'Carbon', value: metrics.carbon, fullMark: 100 },
+    { subject: 'Water', value: metrics.water, fullMark: 100 },
+    { subject: 'Bio', value: metrics.biodiversity, fullMark: 100 },
+    { subject: 'Cost', value: metrics.cost, fullMark: 100 },
+    { subject: 'Materials', value: metrics.materials, fullMark: 100 },
+  ]
+
+  return (
+    <div className="w-full h-full min-h-[300px]">
+       <ResponsiveContainer width="100%" height="100%">
+          <RadarChart data={chartData} cx="50%" cy="50%" outerRadius="80%">
+            <PolarGrid stroke="rgba(255,255,255,0.1)" />
+            <PolarAngleAxis dataKey="subject" tick={{ fill: 'rgba(255,255,255,0.5)', fontSize: 10, fontWeight: 'bold' }} />
+            <Radar
+              name="Metrics"
+              dataKey="value"
+              stroke="#10b981"
+              fill="#10b981"
+              fillOpacity={0.3}
+              strokeWidth={2}
+            />
+          </RadarChart>
+       </ResponsiveContainer>
+    </div>
+  )
+}
