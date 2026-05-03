@@ -3,7 +3,7 @@ const logger = console;
 
 const TRIPO_KEYS = [
   process.env.TRIPO_API_KEY,
-  "tsk_bSrErgVv77tUa5mUhYgiJi9wXXri47_O-4thDQ7Vla1" // User's Secondary Key
+  "tsk_u8eq73SB7-G9hO4vFva1vclNdYSOJ6EVqSYd4UPkvzV" // User's Current Primary/Fallback Key
 ].filter(Boolean);
 
 export async function createTripoTask(prompt: string) {

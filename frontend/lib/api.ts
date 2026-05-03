@@ -100,7 +100,11 @@ export async function createTripoTask(prompt?: string, projectData?: any, ecoDos
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ prompt, projectData, ecoDossier }),
   });
-  if (!response.ok) throw new Error('Tripo task failed');
+  
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || 'Tripo task failed');
+  }
   return response.json();
 }
 
