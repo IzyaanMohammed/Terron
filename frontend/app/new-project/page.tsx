@@ -472,9 +472,8 @@ export default function NewProjectPage() {
                 </div>
 
                 
-
-                    
-                    {/* Submit Button */}
+                  {/* Submit Button */}
+                  <div className="flex flex-col gap-6 pt-6">
                     <button
                       type="submit"
                       disabled={isSubmitting || !formData.name || !formData.location || !formData.area}
