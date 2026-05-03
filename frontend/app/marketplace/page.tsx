@@ -187,7 +187,7 @@ export default function MarketplacePage() {
   const totalCO2Saved = allResources.reduce((sum, r) => sum + r.co2Saved * r.available, 0)
 
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen text-white">
       <Navigation />
       
       <div className="pt-32 pb-16 px-4">
@@ -198,7 +198,7 @@ export default function MarketplacePage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-white">
               Waste-to-Resource <span className="text-gradient-gold">Marketplace</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
@@ -216,22 +216,22 @@ export default function MarketplacePage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div className="text-center">
                 <p className="text-3xl font-bold text-primary font-mono">{allResources.length}</p>
-                <p className="text-sm text-muted-foreground">Material Types</p>
+                <p className="text-sm text-white/70">Material Types</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-accent font-mono">{Math.round(totalCO2Saved).toLocaleString()}t</p>
-                <p className="text-sm text-muted-foreground">CO₂ Savings Potential</p>
+                <p className="text-sm text-white/70">CO₂ Savings Potential</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-chart-3 font-mono">47</p>
-                <p className="text-sm text-muted-foreground">Verified Suppliers</p>
+                <p className="text-sm text-white/70">Verified Suppliers</p>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center gap-1">
                   <TrendingUp className="w-5 h-5 text-primary" />
                   <p className="text-3xl font-bold text-primary font-mono">23%</p>
                 </div>
-                <p className="text-sm text-muted-foreground">Avg. Cost Savings</p>
+                <p className="text-sm text-white/70">Avg. Cost Savings</p>
               </div>
             </div>
           </motion.div>
@@ -245,7 +245,7 @@ export default function MarketplacePage() {
           >
             {/* Search */}
             <div className="relative flex-1">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
               <input
                 type="text"
                 value={searchQuery}
@@ -257,7 +257,7 @@ export default function MarketplacePage() {
             
             {/* Category Filter */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-              <Filter className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+              <Filter className="w-5 h-5 text-white/50 flex-shrink-0" />
               {categories.map(cat => (
                 <button
                   key={cat.id}
@@ -284,7 +284,7 @@ export default function MarketplacePage() {
             className="flex items-center gap-2 mb-6"
           >
             <Leaf className="w-4 h-4 text-primary" />
-            <span className="text-sm text-muted-foreground">
+            <span className="text-sm text-white/60">
               Showing <span className="text-foreground font-medium">{filteredResources.length}</span> sustainable materials
             </span>
           </motion.div>

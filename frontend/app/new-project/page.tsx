@@ -208,6 +208,64 @@ export default function NewProjectPage() {
               transition={{ delay: 0.2 }}
               className="glass-card rounded-3xl p-8"
             >
+              <div className="space-y-8 mb-10">
+                {/* Enticing Quick Start Badge */}
+                <div className="flex flex-col items-center gap-4">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary animate-pulse"
+                  >
+                    <Zap className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase tracking-widest">Instant Showcase: Try a Demo Now</span>
+                  </motion.div>
+                  <p className="text-muted-foreground text-sm text-center">
+                    Skip the data entry and see Terron's intelligence in action with our flagship projects.
+                  </p>
+                </div>
+
+                {/* Demo Buttons moved to top */}
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    type="button"
+                    onClick={loadDemoQusais}
+                    disabled={isTypingDemo}
+                    className="relative group overflow-hidden py-10 rounded-2xl border-2 border-accent/20 bg-accent/5 transition-all hover:bg-accent/10 hover:border-accent/40 active:scale-95 disabled:opacity-50"
+                  >
+                    <div className="relative z-10 flex flex-col items-center gap-3">
+                      <div className="p-3 rounded-full bg-accent text-accent-foreground shadow-lg shadow-accent/20">
+                        <Building2 className="w-6 h-6" />
+                      </div>
+                      <span className="font-serif text-xl font-bold text-accent">Qusais Villa</span>
+                      <span className="text-[10px] text-accent/60 uppercase tracking-tighter">Native Dubai Estate</span>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/0 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={loadDemoCultural}
+                    disabled={isTypingDemo}
+                    className="relative group overflow-hidden py-10 rounded-2xl border-2 border-primary/20 bg-primary/5 transition-all hover:bg-primary/10 hover:border-primary/40 active:scale-95 disabled:opacity-50"
+                  >
+                    <div className="relative z-10 flex flex-col items-center gap-3">
+                      <div className="p-3 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/20">
+                        <Zap className="w-6 h-6" />
+                      </div>
+                      <span className="font-serif text-xl font-bold text-primary">BBAY Concept</span>
+                      <span className="text-[10px] text-primary/60 uppercase tracking-tighter">Sustainable Landmark</span>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="h-px flex-1 bg-border/50" />
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Or Manually Configure</span>
+                  <div className="h-px flex-1 bg-border/50" />
+                </div>
+              </div>
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Project Name */}
                 <div className="space-y-2">
@@ -414,47 +472,7 @@ export default function NewProjectPage() {
                 </div>
 
                 
-                  {/* Buttons */}
-                  <div className="flex flex-col gap-6 pt-6">
-                    {/* Demo Buttons */}
-                    <div>
-                      <p className="text-xs font-bold text-primary/60 uppercase tracking-widest mb-4 text-center">⚡ Initialize Flagship Showcase</p>
-                      <div className="grid grid-cols-2 gap-4">
-                        <button
-                          type="button"
-                          onClick={loadDemoQusais}
-                          disabled={isTypingDemo}
-                          className="relative group overflow-hidden py-10 rounded-2xl border-2 border-accent/20 bg-accent/5 transition-all hover:bg-accent/10 hover:border-accent/40 active:scale-95 disabled:opacity-50"
-                        >
-                          <div className="relative z-10 flex flex-col items-center gap-3">
-                            <div className="p-3 rounded-full bg-accent text-accent-foreground shadow-lg shadow-accent/20">
-                              <Building2 className="w-6 h-6" />
-                            </div>
-                            <span className="font-serif text-xl font-bold text-accent">Qusais Villa</span>
-                            <span className="text-[10px] text-accent/60 uppercase tracking-tighter">Native Dubai Estate</span>
-                          </div>
-                          <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/0 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
 
-                        <button
-                          type="button"
-                          onClick={loadDemoCultural}
-                          disabled={isTypingDemo}
-                          className="relative group overflow-hidden py-10 rounded-2xl border-2 border-primary/20 bg-primary/5 transition-all hover:bg-primary/10 hover:border-primary/40 active:scale-95 disabled:opacity-50"
-                        >
-                          <div className="relative z-10 flex flex-col items-center gap-3">
-                            <div className="p-3 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/20">
-                              <Zap className="w-6 h-6" />
-                            </div>
-                            <span className="font-serif text-xl font-bold text-primary">BBAY Concept</span>
-                            <span className="text-[10px] text-primary/60 uppercase tracking-tighter">Sustainable Landmark</span>
-                          </div>
-                          <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
-                      </div>
-                    </div>
-                    
-                    <div className="h-px bg-border/50 my-2" />
                     
                     {/* Submit Button */}
                     <button

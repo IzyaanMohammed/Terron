@@ -72,10 +72,10 @@ export function MarketplaceCard({ resource, delay = 0, isHovered, onHover, onLea
       
       {/* Content */}
       <div className="p-4">
-        <h4 className="font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
+        <h4 className="font-medium text-white mb-1 group-hover:text-primary transition-colors">
           {resource.name}
         </h4>
-        <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
+        <p className="text-xs text-white/60 mb-3 line-clamp-2">
           {resource.description}
         </p>
         
